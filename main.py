@@ -9,7 +9,6 @@ import models
 import google.generativeai as genai
 from apscheduler.schedulers.background import BackgroundScheduler
 
-# সেফ প্লেসহোল্ডার (রেন্ডারে এনভায়রনমেন্ট ভেরিয়েবল থেকে পড়বে)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY_HERE")
 WHATSAPP_TOKEN = os.getenv("WHATSAPP_TOKEN", "YOUR_META_ACCESS_TOKEN")
 PHONE_NUMBER_ID = os.getenv("PHONE_NUMBER_ID", "1246133088592613")
@@ -139,3 +138,8 @@ async def whatsapp_webhook(request: Request, db: Session = Depends(get_db)):
         print(f"Error processing webhook: {e}")
 
     return {"status": "success"}
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
